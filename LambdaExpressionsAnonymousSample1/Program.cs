@@ -27,6 +27,15 @@ namespace LambdaExpressionsAnonymousSample1
                 Console.WriteLine(item);
             }
 
+            Console.WriteLine();
+            Console.WriteLine();
+
+            var sortedDogs = animalLista.OrderByDescending(x => x.Idade);
+            foreach (var dog in sortedDogs)
+            {
+                Console.WriteLine($"Meu cachorro {dog.NomeAnimal} com a idade de {dog.Idade} passados.");
+            }
+
             Console.Read();
         }
     }
