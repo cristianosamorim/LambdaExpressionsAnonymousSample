@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
-namespace LambdaExpressionsAnonymousSample1
+namespace LambdaExpressionsAnonymousSample
 {
     public class Cachorro
     {
@@ -10,10 +13,31 @@ namespace LambdaExpressionsAnonymousSample1
         public int Idade { get; set; }
     }
 
+
+
     class Program
     {
+        public static int CalculateElapsedDays(DateTime from, DateTime now) => (now - from).Days;
+
+
         static void Main(string[] args)
         {
+            Expression<Func<double, double, double, double, double, double>> infix = (a, b, c, d, e) => a + b - c * d / 2 + e * 3;
+            Expression<Func<int, int, int>> somaExp = (a, b) => (a + b);
+
+            var testeValor = infix.Compile();
+            Console.WriteLine(infix);
+            Console.WriteLine(testeValor(1,2,3,4,5));
+            Console.WriteLine("Calculando o total de dias {0}", CalculateElapsedDays(new DateTime(2022,11,18), DateTime.Now ));
+
+            var list = MultpilicationFormatter.Format(Enumerable.Range(1, 10).ToList());
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+
+
             var animal = new List<Cachorro>() {
                 new Cachorro { Nome = "Neymar", Idade = 4 },
                 new Cachorro { Nome = "Fernandinho", Idade = 9 },
